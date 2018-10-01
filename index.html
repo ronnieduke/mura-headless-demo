@@ -227,14 +227,21 @@
     
     <script>
 	 (function(){
-		 Mura.init(
-		  {
-		    siteid:'headless-example',
-		    rootpath:'https://it-demo.muraxp.com',
-		    containerSelector:'body'
-		  }
-		); 
-	}());  
+
+		Mura.init({
+			siteid:'headless-example',
+			rootpath:'https://it-demo.muraxp.com',
+			containerSelector:'body'
+		});
+	
+		Mura(()=>{
+			let templates={};
+	
+			Mura.loader()
+				.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.7.1.min.css')
+				.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.7.1.skin.css');
+		});
+	}());
 	</script>
 
   </body>
