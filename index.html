@@ -226,12 +226,14 @@
     <script src="js/new-age.min.js"></script>
     
     <script>
-	 Mura.init(
-	  {
-	    siteid:'mmp-demo',
-	    rootpath:'http://it-demo.muraxp.com'
-	  }
-	);   
+	 (function(){
+		 Mura.init(
+		  {
+		    siteid:'mmp-demo',
+		    rootpath:'http://it-demo.muraxp.com'
+		  }
+		); 
+	}());  
 	</script>
 
   </body>
