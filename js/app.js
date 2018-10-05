@@ -2,7 +2,7 @@
 
 	Mura.init({
 		siteid:'headless-demo',
-		rootpath:'https://it-demo.muraxp.com/resources',
+		rootpath:'https://it-demo.muraxp.com',
 		containerSelector:'body'
 	});
 
@@ -75,7 +75,7 @@
 			let hash= location.hash || '#';
 
 			// Get the HTML template 
-			//alert(Mura.renderFilename);
+			alert(Mura.renderFilename);
 			
 			Mura.renderFilename(
 				hash.split('#')[1],
