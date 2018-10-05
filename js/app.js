@@ -75,7 +75,7 @@
 			//let hash= location.hash || '#';
 
 			// Get the HTML template 
-			
+			//alert(window.location.pathname);
 			Mura.renderFilename(
 				//hash.split('#')[1],
 				window.location.pathname,
