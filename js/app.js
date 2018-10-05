@@ -84,6 +84,10 @@
 
 				renderTemplate(content.get('template')).then(()=>{
 
+					// title and meta tags
+					Mura('title').html(content.get('htmlTitle'));
+					Mura('head').append('<meta name="description" content="' + content.get('metadesc') + '">');
+					
 					Mura('h1').html(content.get('title'));
 					
 					// Add the Body
