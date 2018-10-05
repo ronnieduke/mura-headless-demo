@@ -84,6 +84,8 @@
 
 				renderTemplate(content.get('template')).then(()=>{
 
+					Mura('h1').html(content.get('title'));
+					
 					// Add the Body
 					Mura('.mura-content').html(content.get('body'));
 					
