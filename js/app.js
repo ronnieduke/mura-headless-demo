@@ -75,7 +75,6 @@
 			let hash= location.hash || '#';
 
 			// Get the HTML template 
-			alert(Mura.renderFilename);
 			
 			Mura.renderFilename(
 				hash.split('#')[1],
