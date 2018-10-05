@@ -79,7 +79,7 @@
 				renderTemplate(content.get('template')).then(()=>{
 
 					Mura('.mura-content').html(content.get('body'));
-					Mura('.mura-html-queues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
+					//Mura('.mura-html-queues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
 
 					Mura.extend(Mura,content.get('config'));
 
