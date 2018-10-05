@@ -13,6 +13,7 @@
 			.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.7.1.min.css')
 			.loadcss(Mura.rootpath + '/core/modules/v1/core_assets/css/mura.7.1.skin.css');
 
+		// build the primary nav
 		function buildNav(container,parentid){
 
 			container.html('');
@@ -32,6 +33,7 @@
 			});
 		}
 
+		// create function to render a custom nav  
 		function renderNav(container,collection){
 			container.html('');
 			collection.forEach(item=>{
@@ -39,6 +41,7 @@
 			});
 		}
 
+		// Create the Breadcrumb nav
 		function buildCrumbs(content){
 			content.get('crumbs').then(collection=>{
 				collection.get('items').reverse();
@@ -57,7 +60,7 @@
 				(resolve, reject)=>{
 					template=template.split('.')[0];
 					if(typeof templates[template] == 'undefined'){
-						Mura.get('./templates/' + template + '.html').then(resp=>{
+						Mura.get('/templates/' + template + '.html').then(resp=>{
 							templates[template]=resp;
 							applyTemplate(templates[template],resolve);
 						});
@@ -71,6 +74,7 @@
 		function render(){
 			let hash= location.hash || '#';
 
+			// Get the HTML template 
 			Mura.renderFilename(
 				hash.split('#')[1],
 				Mura.getQueryStringParams()
@@ -78,25 +82,31 @@
 
 				renderTemplate(content.get('template')).then(()=>{
 
+					// Add the Body
 					Mura('.mura-content').html(content.get('body'));
-					// html head and foot queues to enable layout manager
+					
+					// html head and foot queues to enable admin toolbar and layout manager
 					Mura('.mura-html-queues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
 
 					Mura.extend(Mura,content.get('config'));
 
+					// render the various content regions 
 					Mura('.mura-region-container').each(item=>{
 						var item=Mura(item);
 						item.html(content.renderDisplayRegion(item.data('region')));
 					});
 
+					// Render the primary nav
 					if(content.hasParent() && content.get('type') != 'Folder' && content.get('type') != 'Calendar'){
 						buildNav(Mura('.mura-child-nav'),content.get('contentid'));
 					} else {
 						Mura('.mura-child-nav').html('');
 					}
 
+					// build the breadcrumbs
 					buildCrumbs(content);
 
+					// Process the markup
 					Mura(document).processMarkup();
 
 				})
