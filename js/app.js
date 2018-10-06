@@ -123,7 +123,7 @@
 		}
 
 		render();
-
+		window.Mura=Mura;
 		Mura(window).on('hashchange', render);
 
 	});
