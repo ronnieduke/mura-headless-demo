@@ -77,7 +77,7 @@
 			// Get the HTML template 
 			//alert(window.location.pathname);
 			Mura.renderFilename(
-				hash,
+				hash.split('#')[1],
 				Mura.getQueryStringParams()
 			).then(content=>{
 				Mura('title').html(content.get('htmlTitle'));
