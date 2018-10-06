@@ -81,11 +81,12 @@
 				window.location.pathname,
 				Mura.getQueryStringParams()
 			).then(content=>{
-
+				Mura('title').html(content.get('htmlTitle'));
+				
 				renderTemplate(content.get('template')).then(()=>{
 
 					// title and meta tags
-					Mura('title').html(content.get('htmlTitle'));
+					
 					Mura('head').append('<meta name="description" content="' + content.get('metadesc') + '">');
 					
 					Mura('h1').html(content.get('title'));
