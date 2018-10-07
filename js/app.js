@@ -97,6 +97,7 @@
 					Mura('.mura-html-queues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
 
 					Mura.extend(Mura,content.get('config'));
+					Mura.context=Mura.rootpath;
 
 					// render the various content regions 
 					Mura('.mura-region-container').each(item=>{
