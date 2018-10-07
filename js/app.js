@@ -73,52 +73,57 @@
 
 		function render(){
 			let hash= location.hash || '#';
-			console.log(Mura.getQueryStringParams());
+			
 			// Get the HTML template 
 			//alert(window.location.pathname);
 			Mura.renderFilename(
 				hash.split('#')[1],
 				Mura.getQueryStringParams()
 			).then(content=>{
-				Mura('title').html(content.get('htmlTitle'));
-				
-				renderTemplate(content.get('template')).then(()=>{
-
-					// title and meta tags
+				if(content.get('redirect')){
+					location.href=content.get('redirect');
 					
-					Mura('head').append('<meta name="description" content="' + content.get('metadesc') + '">');
-					
-					Mura('h1').html(content.get('title'));
-					
-					// Add the Body
-					Mura('.mura-content').html(content.get('body'));
-					
-					// html head and foot queues to enable admin toolbar and layout manager
-					Mura('.mura-html-queues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
+				} else {
+					Mura('title').html(content.get('htmlTitle'));
 
-					Mura.extend(Mura,content.get('config'));
-					Mura.context=Mura.rootpath;
+					renderTemplate(content.get('template')).then(()=>{
 
-					// render the various content regions 
-					Mura('.mura-region-container').each(item=>{
-						var item=Mura(item);
-						item.html(content.renderDisplayRegion(item.data('region')));
-					});
+						// title and meta tags
 
-					// Render the primary nav
-					if(content.hasParent() && content.get('type') != 'Folder' && content.get('type') != 'Calendar'){
-						buildNav(Mura('.mura-child-nav'),content.get('contentid'));
-					} else {
-						Mura('.mura-child-nav').html('');
-					}
+						Mura('head').append('<meta name="description" content="' + content.get('metadesc') + '">');
 
-					// build the breadcrumbs
-					buildCrumbs(content);
+						Mura('h1').html(content.get('title'));
 
-					// Process the markup
-					Mura(document).processMarkup();
+						// Add the Body
+						Mura('.mura-content').html(content.get('body'));
 
-				})
+						// html head and foot queues to enable admin toolbar and layout manager
+						Mura('.mura-html-queues').html(content.get('htmlheadqueue') + content.get('htmlfootqueue'));
+
+						Mura.extend(Mura,content.get('config'));
+						Mura.context=Mura.rootpath;
+
+						// render the various content regions 
+						Mura('.mura-region-container').each(item=>{
+							var item=Mura(item);
+							item.html(content.renderDisplayRegion(item.data('region')));
+						});
+
+						// Render the primary nav
+						if(content.hasParent() && content.get('type') != 'Folder' && content.get('type') != 'Calendar'){
+							buildNav(Mura('.mura-child-nav'),content.get('contentid'));
+						} else {
+							Mura('.mura-child-nav').html('');
+						}
+
+						// build the breadcrumbs
+						buildCrumbs(content);
+
+						// Process the markup
+						Mura(document).processMarkup();
+
+					})
+				}
 
 			});
 		}
