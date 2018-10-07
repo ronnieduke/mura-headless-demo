@@ -73,7 +73,7 @@
 
 		function render(){
 			let hash= location.hash || '#';
-			alert(hash.split('#')[1])
+			console.log(Mura.getQueryStringParams());
 			// Get the HTML template 
 			//alert(window.location.pathname);
 			Mura.renderFilename(
