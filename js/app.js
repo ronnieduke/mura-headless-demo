@@ -86,7 +86,12 @@
 				} else {
 					Mura('title').html(content.get('htmlTitle'));
 
-					renderTemplate(content.get('template')).then(()=>{
+					if(content.get('subtype') == 'Resource'){
+						let template= "resource";
+					}else{
+						let template= "default";
+					}
+					renderTemplate(template).then(()=>{
 
 						// title and meta tags
 
