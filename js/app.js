@@ -91,7 +91,6 @@
 					}else{
 						var template= "default";
 					}
-					alert(template);
 					renderTemplate(template).then(()=>{
 
 						// title and meta tags
